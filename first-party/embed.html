@@ -19,23 +19,22 @@
   function buildUid() {
     return new Date().getTime()
   }
-  function writeUid() {
+  function writeUids() {
     if (document.cookie) {
       return
     }
     document.cookie = `default-uid=${buildUid()};expires=Fri, 31 Dec 2021 23:59:59 GMT;path=/`
     document.cookie = `samesite-none-uid=${buildUid()};expires=Fri, 31 Dec 2021 23:59:59 GMT;path=/;secure;SameSite=None`
   }
-  function getUid() {
+  function getUids() {
     if (!document.cookie) {
       return ''
     }
-    const cookie = document.cookie.split('=')
-    return cookie[1]
+    return document.cookie.split(';')
   }
-  writeUid()
-  const uid = getUid()
-  const data = JSON.stringify({ uid })
+  writeUids()
+  const uids = getUids()
+  const data = JSON.stringify(uids)
   window.parent.postMessage(data, "*")
 
   document.getElementById('cookie-output').innerHTML = document.cookie.split(';').join('<br>')
