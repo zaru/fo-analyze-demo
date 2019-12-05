@@ -7,6 +7,14 @@
   <title>Document</title>
 </head>
 <body>
+  <p>analyze.zaru.dev</p>
+  <p>Set 2 cookies.</p>
+  <ul>
+    <li>default-uid=${buildUid()};expires=Fri, 31 Dec 2021 23:59:59 GMT;path=/</li>
+    <li>samesite-none-uid=${buildUid()};expires=Fri, 31 Dec 2021 23:59:59 GMT;path=/;secure;SameSite=None</li>
+  </ul>
+  <p>Current document.cookie is</p>
+  <div id="cookie-output"></div>
 <script>
   function buildUid() {
     return new Date().getTime()
@@ -15,8 +23,8 @@
     if (document.cookie) {
       return
     }
-    document.cookie = `uid=${buildUid()};expires=Fri, 31 Dec 2021 23:59:59 GMT;path=/`
-    // document.cookie = `uid=${buildUid()};expires=Fri, 31 Dec 2021 23:59:59 GMT;path=/;secure;SameSite=None`
+    document.cookie = `default-uid=${buildUid()};expires=Fri, 31 Dec 2021 23:59:59 GMT;path=/`
+    document.cookie = `samesite-none-uid=${buildUid()};expires=Fri, 31 Dec 2021 23:59:59 GMT;path=/;secure;SameSite=None`
   }
   function getUid() {
     if (!document.cookie) {
@@ -29,6 +37,8 @@
   const uid = getUid()
   const data = JSON.stringify({ uid })
   window.parent.postMessage(data, "*")
+
+  document.getElementById('cookie-output').innerHTML = document.cookie.split(';').join('<br>')
 </script>
 </body>
 </html>

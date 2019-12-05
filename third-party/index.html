@@ -8,9 +8,12 @@
 </head>
 <body>
   <iframe src="https://analyze.zaru.dev/embed.html"></iframe>
+  <p>postMessage from iframe</p>
+  <div id="iframe-postmessage"></div>
   <script>
   window.addEventListener('message', event => {
-    console.log(event)
+    console.log('postMessage: ', event)
+    document.getElementById('iframe-postmessage').innerHTML = JSON.stringify(event.data)
   })
   </script>
 </body>
