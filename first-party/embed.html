@@ -15,7 +15,8 @@
     if (document.cookie) {
       return
     }
-    document.cookie = `uid=${buildUid()};expires=Fri, 31 Dec 2021 23:59:59 GMT;path=/`
+    // document.cookie = `uid=${buildUid()};expires=Fri, 31 Dec 2021 23:59:59 GMT;path=/`
+    document.cookie = `uid=${buildUid()};expires=Fri, 31 Dec 2021 23:59:59 GMT;path=/;secure;SameSite=None`
   }
   function getUid() {
     if (!document.cookie) {
