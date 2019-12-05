@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<script>
+  function buildUid() {
+    return new Date().getTime()
+  }
+  function writeUid() {
+    if (document.cookie) {
+      return
+    }
+    document.cookie = `uid=${buildUid()};expires=Fri, 31 Dec 2021 23:59:59 GMT;path=/`
+  }
+  function getUid() {
+    if (!document.cookie) {
+      return ''
+    }
+    const cookie = document.cookie.split('=')
+    return cookie[1]
+  }
+  writeUid()
+  const uid = getUid()
+  const data = JSON.stringify({ uid })
+  window.parent.postMessage(data, "*")
+</script>
+</body>
+</html>
